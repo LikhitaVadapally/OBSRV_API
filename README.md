@@ -5,11 +5,17 @@ A FastAPI-based REST API with PostgreSQL backend, containerized using Docker, an
 # Project Structure
 OBSRV_API/
 ├── app/ # FastAPI application (CRUD, models, schemas, DB setup)
+
 ├── db_init/ # Database initialization SQL scripts
+
 ├── k8s/ # Kubernetes deployment and service manifests
+
 ├── tests/ # Unit tests for the API
+
 ├── docker-compose.yml # Docker Compose setup for local development
+
 ├── Dockerfile # Docker image build file
+
 └── requirements.txt # Python dependencies
 
 
