@@ -33,12 +33,39 @@ OBSRV_API/
 git clone https://github.com/LikhitaVadapally/OBSRV_API.git
 cd OBSRV_API
 
-### 2. Run with Docker Compose
+### Run with Docker Compose
+#1.start Postgres and API
 docker-compose up --build
 
-### 3. Access API docs
+#2. Access API docs
 http://127.0.0.1:8000/docs
 
-### 4. Run tests
+# 3. Run tests
+pytest tests/
+
+
+### Run with Kubernetes
+#1. Build the app image
+docker build -t obsrv_api-api:latest .
+
+#2. Deploy Postgres in Kubernetes
+- Apply the provided manifests that create a Postgres Deployment and a Service named db.
+- Because the Service is named db in the same namespace as the app, the application can use the hostname db:5432 directly
+
+#3. Deploy the FastAPI app
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+kubectl apply -f k8s/postgres.yaml
+
+#4. Verify resources
+kubectl get pods
+kubectl get svc
+
+#5. Access the API (with port-forward)
+kubectl port-forward svc/fastapi-service 8080:80
+http://localhost:8080/docs
+
+
+#6. Running tests
 pytest tests/
 
